@@ -1,0 +1,79 @@
+! urxvt
+URxvt*buffered: true
+URxvt*cursorBlink: true
+URxvt*underlineColor: white
+URxvt*font:  xft:inconsolata:size=10:antialias=true
+URxvt*depth: 32
+URxvt*borderless: 1
+URxvt*scrollBar: false
+URxvt*loginShell: true
+Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
+URxvt*saveLines: 5000
+URxvt*termName: rxvt-unicode
+URxvt.matcher.button: 1
+!! Key
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+URxvt.iso14755 : false
+!! Transparent
+URxvt.depth: 32
+URxvt.background: [95]#111111
+
+
+
+#define S_base03        #beffa1
+#define S_base02        #af90ff
+#define S_base01        #00c1ff
+#define S_base00        #ffffff
+#define S_base0         #ffdc77
+#define S_base1         #00bbff
+#define S_base2         #eee8d5
+#define S_base3         #ffba00
+#define S_yellow        #FFFF00
+#define S_orange        #FFA500
+#define S_red           #FF0000
+#define S_magenta       #FF00FF
+#define S_violet        #8F00FF
+#define S_blue          #0000FF
+#define S_cyan          #00FFFF
+#define S_green         #00FF00
+
+*background:            S_base03
+*foreground:            S_base00
+*cursorColor:           S_base1
+*pointerColorBackground:S_base01
+*pointerColorForeground:S_base1
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
+
+!! red dark/light
+*color1:                S_red
+*color9:                S_orange
+
+!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+
+!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+
+!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+
+!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+
+!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+
+!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
