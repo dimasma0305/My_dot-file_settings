@@ -1,22 +1,36 @@
 ! urxvt
 URxvt*buffered: true
 URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
 URxvt*underlineColor: white
 URxvt*font:  xft:inconsolata:size=10:antialias=true
-URxvt*depth: 32
-URxvt*borderless: 1
-URxvt*scrollBar: false
+URxvt*borderless: true
+!!URxvt*skipBuiltinGlyphs: true
+
+!!URxvt*fading: 50 
+URxvt*title:
+Urxvt*secondaryScroll:  true
 URxvt*loginShell: true
-Urxvt*secondaryScroll:  true    # Enable Shift-PageUp/Down in screen
 URxvt*saveLines: 5000
 URxvt*termName: rxvt-unicode
 URxvt.matcher.button: 1
+
+
+!! scroll bar
+URxvt*thickness: 1
+URxvt*scrollBar: true
+URxvt*scrollstyle: plain
+URxvt*scrollColor: [20]#ffffff
+URxvt*scrollBar_right: true
+!!URxvt*scrollBar_floating: true
+
 !! Key
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Control-Meta-c: builtin-string:
 URxvt.keysym.Control-Meta-v: builtin-string:
 URxvt.iso14755 : false
+
 !! Transparent
 URxvt.depth: 32
 URxvt.background: [95]#111111
