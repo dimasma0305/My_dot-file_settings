@@ -33,7 +33,7 @@ URxvt.iso14755 : false
 
 !! Transparent
 URxvt.depth: 32
-URxvt.background: [95]#111111
+URxvt.background: [95]#181B28
 
 
 
