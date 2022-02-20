@@ -66,7 +66,7 @@ conky.config = {
     color3 = 'AAAAAA',
  
     -- layouting
-    template0 = [[${font Arial :size=10}${color2}]],
+    template0 = [[${font Arial :size=10}]],
     template1 = [[${color1}\1]],
     template2 = [[${goto 150}${color}]],
     template3 = [[${goto 180}${color}${alignr}]],
@@ -74,22 +74,40 @@ conky.config = {
  
 conky.text = [[
 ${if_running deadbeef-main}
-${template0}${template2}${execi 30 whoami}
-${template2}${color 3399FF}deadbeef audio is playing: 
-${template2}${color FFFFFF}${exec deadbeef --nowplaying "%a"} 
-${template2}${color FFFFFF}${exec deadbeef --nowplaying "%t"}
-${template2}${color FFFFFF}${exec deadbeef --nowplaying "%b"} 
-${template2}${color 3399FF}${exec deadbeef --nowplaying "%e"}${offset 2} / ${exec deadbeef --nowplaying "%l"}
-${image ~/.config/Conky/logo.jpg -p 5,5 -s 125x125}${color 3399FF}
+${template0}${template2}${color2}${execi 30 whoami}
+${template2}${color 3399FF}deadbeef audio is playing :
+${template2}${color FFFFFF}Artist${goto 200}:${goto 220}${exec deadbeef --nowplaying "%a"} 
+${template2}${color FFFFFF}Title${goto 200}:${goto 220}${exec deadbeef --nowplaying "%t"}
+${template2}${color FFFFFF}Album${goto 200}:${goto 220}${exec deadbeef --nowplaying "%b"} 
+
+${template2}${color 3399FF}${exec deadbeef --nowplaying "%e"}${offset 2} / ${exec deadbeef --nowplaying "%l"}${image ~/.config/Conky/logo.jpg -p 5,5 -s 125x125}${color 3399FF}
 ${goto 10}${execbar bash ~/.config/Conky/myscript.sh}
 
-${goto 10}${color1}RAM:  ${color2}$mem/$memmax $memperc% ${color1}${membar 4, 124}  
-${goto 10}${color1}Swap: ${color2}$swap/$swapmax $swapperc% ${color1}${swapbar 4, 124}  
-${goto 10}${color1}CPU:  ${freq_g}GHz ${color2}${cpu}% ${color1}${cpubar 4, 124}${voffset 8}  
-${else}
-${goto 10}${color1}RAM:  ${color2}$mem/$memmax $memperc% ${color1}${membar 4, 124}  
-${goto 10}${color1}Swap: ${color2}$swap/$swapmax $swapperc% ${color1}${swapbar 4, 124}  
-${goto 10}${color1}CPU:  ${freq_g}GHz ${color2}${cpu}% ${color1}${cpubar 4, 124}${voffset 8}  
-${endif}
+${goto 10}${color1}CPU    ${goto 75}:   ${color2}${freq_g}GHz              ${goto 200}${color3}${cpu}%            ${goto 230}${color1}${cpubar 4, 124}
+${goto 10}${color1}RAM    ${goto 75}:   ${color2}$mem/$memmax              ${goto 200}${color3}$memperc%          ${goto 230}${color1}${membar 4, 124}  
+${goto 10}${color1}Swap   ${goto 75}:   ${color2}$swap/$swapmax            ${goto 200}${color3}$swapperc%         ${goto 230}${color1}${swapbar 4, 124}  
+${goto 10}${color1}Disk   ${goto 75}:   ${color2}${fs_used /}/${fs_size /} ${goto 200}${color3}${fs_used_perc /}% ${goto 230}${color1}${fs_bar 4, 124}
 
+${goto 10}${color1}Distro ${goto 75}:   ${color2}${execi 30 cat /etc/os-release|grep "PRETTY_NAME"|cut -d "=" -f 2|sed 's/"//g'|sed 's/\r//g'}
+${goto 10}${color1}Kernel ${goto 75}:   ${color2}${execi 30 uname -r}
+${goto 10}${color1}DE     ${goto 75}:   ${color2}${execi 30 gnome-shell --version}
+${goto 10}${color1}Uptime ${goto 75}:   ${color2}${uptime_short}
+
+      
+
+${else}
+${template0}${template2}${color2}${execi 30 whoami}
+${template2}${color 3399FF}${hr 2} 
+${template2}${color FFFFFF}Distro   ${goto 200}:${goto 220}    ${color2}${execi 30 cat /etc/os-release|grep "PRETTY_NAME"|cut -d "=" -f 2|sed 's/"//g'|sed 's/\r//g'}
+${template2}${color FFFFFF}Kernel   ${goto 200}:${goto 220}    ${color2}${execi 30 uname -r}
+${template2}${color FFFFFF}DE       ${goto 200}:${goto 220}    ${color2}${execi 30 gnome-shell --version}
+${template2}${color FFFFFF}Uptime   ${goto 200}:${goto 220}    ${color2}${uptime_short}
+${image ~/.config/Conky/logo.jpg -p 5,5 -s 125x125}${color 3399FF}
+${hr 2}
+
+${goto 10}${color1}CPU    ${goto 75}:   ${color2}${freq_g}GHz              ${goto 200}${color3}${cpu}%            ${goto 230}${color1}${cpubar 4, 124}
+${goto 10}${color1}RAM    ${goto 75}:   ${color2}$mem/$memmax              ${goto 200}${color3}$memperc%          ${goto 230}${color1}${membar 4, 124}  
+${goto 10}${color1}Swap   ${goto 75}:   ${color2}$swap/$swapmax            ${goto 200}${color3}$swapperc%         ${goto 230}${color1}${swapbar 4, 124}  
+${goto 10}${color1}Disk   ${goto 75}:   ${color2}${fs_used /}/${fs_size /} ${goto 200}${color3}${fs_used_perc /}% ${goto 230}${color1}${fs_bar 4, 124}
+${endif}
 ]];
