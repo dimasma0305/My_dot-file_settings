@@ -1,0 +1,1 @@
+/home/wowon/.myconf.sh
