@@ -1,1 +1,2 @@
-/home/wowon/.myconf.sh
+alias open='xdg-open'
+export PATH=$PATH:/usr/local/go/bin
