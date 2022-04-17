@@ -8,7 +8,7 @@ progress-bar() {
     clean_line() { printf "\r"; }
 
   for (( elapsed=1; elapsed<=$duration; elapsed++ )); do
-      printf "\e[1;32m[+]Loading...\e[0m"
+      printf "\e[1;32m[+]Hacking...\e[0m"
       already_done; remaining; percentage
       sleep 0.1
       clean_line
