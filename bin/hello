@@ -1,0 +1,18 @@
+#! /usr/bin/bash
+
+progress-bar() {
+  local duration=10
+    already_done() { for ((done=0; done<$elapsed; done++)); do printf "▇"; done }
+    remaining() { for ((remain=$elapsed; remain<$duration; remain++)); do printf " "; done }
+    percentage() { printf "| %s%%" $(( (($elapsed)*100)/($duration)*100/100 )); }
+    clean_line() { printf "\r"; }
+
+  for (( elapsed=1; elapsed<=$duration; elapsed++ )); do
+      printf "\e[1;32m[+]Loading...\e[0m"
+      already_done; remaining; percentage
+      sleep 0.1
+      clean_line
+  done
+}
+progress-bar;
+printf "\r\033[KWellcome $USER!\n"
