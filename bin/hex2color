@@ -1,9 +1,6 @@
 #!/bin/python
 
 import argparse,sys
-from re import X
-
-from pyrsistent import optional
 
 loremipsum = '''Lorem ipsum dolor sit amet, consectetur adipiscing elit.'''
 
@@ -11,19 +8,22 @@ def bold(text):
     return '\033[1m' + text + '\033[0m'
 
 def hex2color(hex, text=loremipsum):
-    # print loremipsum with color
     hex = hex.lstrip('#')
     r, g, b = tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
     return ''.join(('\033[38;2;%d;%d;%dm' % (r, g, b), text, '\033[0m'))
 
 def hex2color_bold(hex, text=loremipsum):
-    # print loremipsum with color
     hex = hex.lstrip('#')
     r, g, b = tuple(int(hex[i:i+2], 16) for i in (0, 2, 4))
     return ''.join(('\033[38;2;%d;%d;%dm' % (r, g, b), bold(text), '\033[0m'))
 
-def color2block(color, length=10):
-    return hex2color(color, (('▇' * 20) + '\n') * length)
+def color2block(color, length=len(loremipsum)):
+    return hex2color(color, '▇' * length)
+def color2icon(color):
+    return hex2color(color, '''⌘ ✲ ⎈ ^ ⌃ ❖ ⎇ ⌥ ⇮ ◆ ◇ ✦ ✧ ⇧ ⇪ 🄰 🅰 ⇪ ⇬ ⇭ ↩ ↵ ⏎ ⌤ ⎆ ▤ ☰ 𝌆 
+⎄ ⭾ ↹ ⇄ ⇤ ⇥ ↤ ↦ ⎋ ⌫ ⟵ ⌦ ⎀ ⎚ ⌧ ↖ ↘ ⇤ ⇥ ⤒ ⤓ ⇞ ⇟ △ ▽ ▲ ▼ ⎗ 
+⎘ ↑ ↓ ← → ◀ ▶ ▲ ▼ ◁ ▷ △ ▽ ⇦ ⇨ ⇧ ⇩ ⬅ ➡ ⬆ ⬇ ⎉ ⎊ ⎙ ⍰ ℹ 🛈 ☾ 
+⏏ ✉ ⌂ ✂ ✄ ⎌ ↶ ↷ ⟲ ⟳ ↺ ↻ 🕨 🕩 🕪 ◼ ⏯ ⏮ ⏭ ✗ ⌖ ⯐ ♼ ♽ ♺ ♳ ♴ ♵''')
 
 def input_parser():
     parser = argparse.ArgumentParser(description='program to convert hex color to color')
@@ -31,15 +31,12 @@ def input_parser():
     parser.add_argument('-b', '--bold', action="store_true")
     parser.add_argument('-l', '--loremipsum', action="store_true")
     
-    parser.add_argument('color')
+    parser.add_argument('color', type=str, help='<hex>')
     parser.add_argument('-t', '--text')
 
     return parser
 
-def main():
-    parser = input_parser()
-    args = parser.parse_args()
-    # if no args, print help
+def process_arguments(args, parser):
     if len(sys.argv) == 1:
         parser.print_help()
         sys.exit(1)
@@ -47,8 +44,20 @@ def main():
         print(hex2color_bold(args.color, args.text))
     elif args.loremipsum:
         print(hex2color(args.color, loremipsum))
+        print(hex2color_bold(args.color, loremipsum))
+        print(color2block(args.color))
+        print(color2icon(args.color))
     else:
-        print(hex2color(args.color, args.text)) 
+        print(hex2color(args.color, args.text))
+
+def main():
+    parser = input_parser()
+    args = parser.parse_args()
+    try:
+        process_arguments(args, parser)
+    except:
+        print("something went wrong")
+ 
 
 if __name__ == '__main__':
     main()
